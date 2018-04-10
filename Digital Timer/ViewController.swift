@@ -10,16 +10,61 @@ import UIKit
 
 class ViewController: UIViewController {
 
+      
+      @IBOutlet weak var swi: UISwitch!
+      @IBOutlet weak var timeLabel: UILabel!
+      var myTimer = Timer()
+      
+      
+      
       override func viewDidLoad() {
+            
             super.viewDidLoad()
+            
             // Do any additional setup after loading the view, typically from a nib.
+            
+            
+            
+            swi.setOn(false, animated: true)
+            
+            
+            
+            //myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            
       }
-
-      override func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            // Dispose of any resources that can be recreated.
+      func updateTime() {
+            
+            let date = Date()
+            
+            let formatter = DateFormatter()
+            
+            formatter.dateFormat = "HH:mm:ss EE"
+            
+            timeLabel.text = formatter.string(from: date)
+            
       }
-
-
+      
+      @IBAction func btsw(_ sender: Any) {
+            if swi.isOn == true {
+                  
+                  
+                  
+                  myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {(myTimer) in self.updateTime()
+                        
+                        
+                        
+                  })
+                  
+            } else {
+                  
+                  myTimer.invalidate()
+                  
+            }
+            
+      }
+      
+      
+      
 }
+
 
